@@ -1,0 +1,257 @@
+{
+  "fetched_at": "2026-09-15T23:30:36+09:00",
+  "fetched_at_label": "2026年9月15日 23:30",
+  "title_range": "9月20日〜22日",
+  "days": [
+    {
+      "iso": "2026-09-20",
+      "label": "9月20日",
+      "dow": "日曜日",
+      "short": "20日(日)"
+    },
+    {
+      "iso": "2026-09-21",
+      "label": "9月21日",
+      "dow": "月曜日",
+      "short": "21日(月)"
+    },
+    {
+      "iso": "2026-09-22",
+      "label": "9月22日",
+      "dow": "火曜日",
+      "short": "22日(火)"
+    }
+  ],
+  "sources": {
+    "weathernews": {
+      "key": "weathernews",
+      "name": "ウェザーニュース",
+      "place": "長崎市",
+      "url": "https://weathernews.jp/onebox/tenki/nagasaki/42201/week.html?tab=4",
+      "ok": true,
+      "stale": false,
+      "error": null,
+      "fetched_at": "2026-09-15T23:30:33+09:00",
+      "published": null,
+      "comment": "スッキリしない空と蒸し暑さ続く。曇りや雨の日が多くなります。降り方が強まるおそれも。朝晩は涼しく感じても、昼間はムシムシと不快な暑さとなる日が多いため、体調管理を万全に行ってください。",
+      "days": {
+        "2026-09-20": {
+          "wx": "くもり",
+          "icon": "cloudy",
+          "high": 32,
+          "low": 23,
+          "pop": 40
+        },
+        "2026-09-21": {
+          "wx": "くもり",
+          "icon": "cloudy",
+          "high": 29,
+          "low": 24,
+          "pop": 40
+        },
+        "2026-09-22": {
+          "wx": "くもり",
+          "icon": "cloudy",
+          "high": 30,
+          "low": 22,
+          "pop": 40
+        }
+      }
+    },
+    "yahoo": {
+      "key": "yahoo",
+      "name": "Yahoo!天気",
+      "place": "長崎市",
+      "url": "https://weather.yahoo.co.jp/weather/jp/42/8410/42201.html",
+      "ok": true,
+      "stale": false,
+      "error": null,
+      "fetched_at": "2026-09-15T23:30:35+09:00",
+      "published": "2026年9月15日 20時00分発表",
+      "comment": null,
+      "days": {
+        "2026-09-20": {
+          "wx": "晴れ",
+          "icon": "sunny",
+          "high": 31,
+          "low": 23,
+          "pop": 0
+        },
+        "2026-09-21": {
+          "wx": "晴時々曇",
+          "icon": "sun_cloud",
+          "high": 30,
+          "low": 24,
+          "pop": 10
+        },
+        "2026-09-22": {
+          "wx": "曇時々晴",
+          "icon": "cloud_sun",
+          "high": 30,
+          "low": 24,
+          "pop": 20
+        }
+      }
+    },
+    "tenki": {
+      "key": "tenki",
+      "name": "tenki.jp",
+      "place": "ハウステンボス",
+      "url": "https://tenki.jp/leisure/9/45/268/2256/10days.html",
+      "ok": true,
+      "stale": false,
+      "error": null,
+      "fetched_at": "2026-09-15T23:30:36+09:00",
+      "published": "2026年9月15日 23時00分発表",
+      "comment": null,
+      "days": {
+        "2026-09-20": {
+          "wx": "晴",
+          "icon": "sunny",
+          "high": 28,
+          "low": 24,
+          "pop": 20,
+          "uv": "強い",
+          "heat": "警戒",
+          "hours": [
+            {
+              "span": "00-06",
+              "wx": "晴",
+              "temp": 25,
+              "pop": 10,
+              "precip": "0㎜",
+              "humidity": 81,
+              "wind": "北東 4m/s"
+            },
+            {
+              "span": "06-12",
+              "wx": "晴",
+              "temp": 24,
+              "pop": 20,
+              "precip": "0㎜",
+              "humidity": 82,
+              "wind": "北北東 4m/s"
+            },
+            {
+              "span": "12-18",
+              "wx": "晴",
+              "temp": 28,
+              "pop": 20,
+              "precip": "0㎜",
+              "humidity": 63,
+              "wind": "北北東 6m/s"
+            },
+            {
+              "span": "18-24",
+              "wx": "晴",
+              "temp": 25,
+              "pop": 10,
+              "precip": "0㎜",
+              "humidity": 72,
+              "wind": "北北東 6m/s"
+            }
+          ]
+        },
+        "2026-09-21": {
+          "wx": "晴時々曇",
+          "icon": "sun_cloud",
+          "high": 27,
+          "low": 23,
+          "pop": 20,
+          "uv": "強い",
+          "heat": "警戒",
+          "hours": [
+            {
+              "span": "00-06",
+              "wx": "晴",
+              "temp": 24,
+              "pop": 10,
+              "precip": "0㎜",
+              "humidity": 77,
+              "wind": "北北東 5m/s"
+            },
+            {
+              "span": "06-12",
+              "wx": "晴時々曇",
+              "temp": 24,
+              "pop": 20,
+              "precip": "0㎜",
+              "humidity": 78,
+              "wind": "北北東 5m/s"
+            },
+            {
+              "span": "12-18",
+              "wx": "晴",
+              "temp": 27,
+              "pop": 10,
+              "precip": "0㎜",
+              "humidity": 67,
+              "wind": "北北東 6m/s"
+            },
+            {
+              "span": "18-24",
+              "wx": "晴",
+              "temp": 25,
+              "pop": 10,
+              "precip": "0㎜",
+              "humidity": 72,
+              "wind": "北北東 7m/s"
+            }
+          ]
+        },
+        "2026-09-22": {
+          "wx": "晴",
+          "icon": "sunny",
+          "high": 28,
+          "low": 24,
+          "pop": 10,
+          "uv": "強い",
+          "heat": "警戒",
+          "hours": [
+            {
+              "span": "00-06",
+              "wx": "晴",
+              "temp": 24,
+              "pop": 10,
+              "precip": "0㎜",
+              "humidity": 80,
+              "wind": "北北東 6m/s"
+            },
+            {
+              "span": "06-12",
+              "wx": "晴",
+              "temp": 24,
+              "pop": 10,
+              "precip": "0㎜",
+              "humidity": 78,
+              "wind": "北東 6m/s"
+            },
+            {
+              "span": "12-18",
+              "wx": "晴",
+              "temp": 28,
+              "pop": 10,
+              "precip": "0㎜",
+              "humidity": 67,
+              "wind": "北東 6m/s"
+            },
+            {
+              "span": "18-24",
+              "wx": "晴",
+              "temp": 26,
+              "pop": 10,
+              "precip": "0㎜",
+              "humidity": 68,
+              "wind": "北東 6m/s"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "urls": {
+    "weathernews": "https://weathernews.jp/onebox/tenki/nagasaki/42201/week.html?tab=4",
+    "yahoo": "https://weather.yahoo.co.jp/weather/jp/42/8410/42201.html",
+    "tenki": "https://tenki.jp/leisure/9/45/268/2256/10days.html"
+  }
+}

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title_range }} 天気予報比較 | 長崎</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600;700&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1220;
+      --bg-soft: #121b2e;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-solid: #17233a;
+      --line: rgba(255, 255, 255, 0.1);
+      --text: #eef3ff;
+      --muted: #9aa8c3;
+      --wni: #1aa6e6;
+      --yahoo: #ff4d4f;
+      --tenki: #3dd68c;
+      --hot: #ff6b4a;
+      --cool: #5ad0ff;
+      --rain: #6ea8ff;
+      --sun: #ffc857;
+      --cloud: #c9d4e8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "IBM Plex Sans JP", "Hiragino Sans", sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(26, 166, 230, 0.18), transparent 55%),
+        radial-gradient(900px 500px at 90% 0%, rgba(61, 214, 140, 0.12), transparent 50%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    header {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .kicker {
+      font-family: Outfit, sans-serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+
+    .chip.warn {
+      border-color: rgba(255, 200, 87, 0.35);
+      color: #f3de9a;
+    }
+
+    .note {
+      background: rgba(255, 200, 87, 0.08);
+      border: 1px solid rgba(255, 200, 87, 0.22);
+      color: #f3de9a;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 13px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 22px 0 18px;
+    }
+
+    .tabs a {
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .tabs a:hover { border-color: rgba(255,255,255,0.28); }
+
+    h2, h3 {
+      scroll-margin-top: 16px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin: 28px 0 14px;
+    }
+
+    .compare {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .day-col {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+
+    .day-head {
+      padding: 16px 16px 12px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), transparent);
+    }
+
+    .day-head .dow { color: var(--muted); font-size: 13px; }
+    .day-head .date { font-size: 24px; font-weight: 700; }
+
+    .source-card {
+      padding: 14px 16px 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .source-name {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 11px;
+    }
+
+    .badge.wni { background: rgba(26,166,230,0.16); color: #7fd4ff; }
+    .badge.yahoo { background: rgba(255,77,79,0.16); color: #ff9a9b; }
+    .badge.tenki { background: rgba(61,214,140,0.16); color: #7ef0b3; }
+
+    .wx {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .icon { width: 52px; height: 52px; }
+    .wx-name { font-weight: 700; font-size: 18px; }
+    .temps { display: flex; gap: 10px; font-size: 15px; margin-top: 2px; }
+    .high { color: var(--hot); font-weight: 700; }
+    .low { color: var(--cool); font-weight: 700; }
+    .missing { color: var(--muted); font-size: 14px; }
+    .pop {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .pop-bar {
+      height: 6px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+
+    .pop-bar span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, #4d8dff, #8fd3ff);
+    }
+
+    .place { color: var(--muted); font-size: 11px; }
+
+    .site-section {
+      margin-top: 28px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px;
+    }
+
+    .site-section h3 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .site-section .sub {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .site-section a { color: #9fd8ff; }
+
+    .days-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .tenki-days { grid-template-columns: 1fr; }
+
+    .mini {
+      background: rgba(0,0,0,0.18);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .mini h4 { font-size: 15px; margin-bottom: 8px; }
+
+    .hours {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 12px;
+    }
+
+    .hours th, .hours td {
+      text-align: left;
+      padding: 8px 6px;
+      border-bottom: 1px solid var(--line);
+      white-space: nowrap;
+    }
+
+    .hours th {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .hours td:last-child, .hours th:last-child { text-align: right; }
+
+    .comment {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(26,166,230,0.1);
+      border: 1px solid rgba(26,166,230,0.22);
+      font-size: 14px;
+    }
+
+    footer {
+      margin-top: 36px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    footer a { color: #9fd8ff; }
+
+    @media (max-width: 1100px) {
+      .tenki-days { grid-template-columns: 1fr; }
+      .hours { font-size: 13px; }
+    }
+
+    @media (max-width: 900px) {
+      .compare, .days-3 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  {% macro icon_svg(kind) -%}
+    {% if kind == 'sunny' %}
+      <svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="12" fill="#ffc857"/><g stroke="#ffc857" stroke-width="3" stroke-linecap="round"><line x1="32" y1="8" x2="32" y2="14"/><line x1="32" y1="50" x2="32" y2="56"/><line x1="8" y1="32" x2="14" y2="32"/><line x1="50" y1="32" x2="56" y2="32"/><line x1="14" y1="14" x2="18" y2="18"/><line x1="46" y1="46" x2="50" y2="50"/><line x1="50" y1="14" x2="46" y2="18"/><line x1="18" y1="46" x2="14" y2="50"/></g></svg>
+    {% elif kind == 'cloudy' %}
+      <svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="36" rx="18" ry="12" fill="#c9d4e8"/><ellipse cx="22" cy="34" rx="10" ry="8" fill="#dce6f5"/><ellipse cx="42" cy="34" rx="11" ry="9" fill="#b7c6de"/></svg>
+    {% elif kind == 'sun_cloud' %}
+      <svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="22" cy="22" r="8" fill="#ffc857"/><ellipse cx="36" cy="38" rx="16" ry="11" fill="#dce6f5"/><ellipse cx="26" cy="38" rx="10" ry="8" fill="#c9d4e8"/></svg>
+    {% elif kind == 'cloud_sun' %}
+      <svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="44" cy="20" r="7" fill="#ffc857"/><ellipse cx="30" cy="38" rx="18" ry="12" fill="#b7c6de"/><ellipse cx="20" cy="38" rx="10" ry="8" fill="#c9d4e8"/></svg>
+    {% elif kind == 'rain' %}
+      <svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="28" rx="16" ry="10" fill="#b7c6de"/><g stroke="#6ea8ff" stroke-width="3" stroke-linecap="round"><line x1="22" y1="42" x2="20" y2="52"/><line x1="32" y1="42" x2="30" y2="54"/><line x1="42" y1="42" x2="40" y2="52"/></g></svg>
+    {% else %}
+      <svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="10" fill="#9aa8c3"/></svg>
+    {% endif %}
+  {%- endmacro %}
+
+  {% macro forecast_card(src, iso, badge, badge_class) -%}
+    {% set fc = src.days.get(iso) %}
+    <div class="source-card">
+      <div class="source-name">
+        <span class="badge {{ badge_class }}">{{ badge }}{% if src.stale %}（前回）{% endif %}</span>
+        <span class="place">{{ src.place }}</span>
+      </div>
+      {% if fc and fc.wx %}
+        <div class="wx">
+          {{ icon_svg(fc.icon) }}
+          <div>
+            <div class="wx-name">{{ fc.wx }}</div>
+            <div class="temps">
+              {% if fc.high is not none %}<span class="high">{{ fc.high }}℃</span>{% endif %}
+              {% if fc.low is not none %}<span class="low">{{ fc.low }}℃</span>{% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="pop"><span>降水確率</span><span>{% if fc['pop'] is not none %}{{ fc['pop'] }}%{% else %}—{% endif %}</span></div>
+        <div class="pop-bar"><span style="width: {{ fc['pop'] if fc['pop'] else 2 }}%"></span></div>
+      {% else %}
+        <p class="missing">この日の予報を取得できませんでした</p>
+      {% endif %}
+    </div>
+  {%- endmacro %}
+
+  <div class="wrap">
+    <header>
+      <div class="kicker">Forecast comparison</div>
+      <h1>{{ title_range }}の天気予報</h1>
+      <div class="meta">
+        <span class="chip">取得日時：{{ fetched_at_label }}</span>
+        {% for src in sources.values() if src.stale %}
+          <span class="chip warn">{{ src.name }}は前回データを表示</span>
+        {% endfor %}
+      </div>
+      <p class="note">
+        ウェザーニュースとYahoo!天気は<strong>長崎市</strong>、tenki.jpは指定URLどおり<strong>ハウステンボス（佐世保）</strong>の予報です。地点が異なるため、気温や天気がずれる場合があります。
+      </p>
+    </header>
+
+    <nav class="tabs">
+      <a href="#compare">3サイト比較</a>
+      <a href="#wni">ウェザーニュース</a>
+      <a href="#yahoo">Yahoo!天気</a>
+      <a href="#tenki">tenki.jp</a>
+    </nav>
+
+    <h2 id="compare">日別比較</h2>
+    <section class="compare">
+      {% for day in days %}
+      <article class="day-col">
+        <div class="day-head">
+          <div class="dow">{{ day.dow }}</div>
+          <div class="date">{{ day.label }}</div>
+        </div>
+        {{ forecast_card(sources.weathernews, day.iso, "ウェザーニュース", "wni") }}
+        {{ forecast_card(sources.yahoo, day.iso, "Yahoo!天気", "yahoo") }}
+        {{ forecast_card(sources.tenki, day.iso, "tenki.jp", "tenki") }}
+      </article>
+      {% endfor %}
+    </section>
+
+    <section class="site-section" id="wni">
+      <h3>ウェザーニュース</h3>
+      <p class="sub">
+        長崎県長崎市の2週間天気予報
+        {% if sources.weathernews.stale %}／ 前回取得分を表示{% endif %}
+        　／
+        <a href="{{ urls.weathernews }}" target="_blank" rel="noopener">元ページを開く</a>
+      </p>
+      <div class="days-3">
+        {% for day in days %}
+          {% set fc = sources.weathernews.days.get(day.iso) %}
+          <div class="mini">
+            <h4>{{ day.short }}</h4>
+            {% if fc and fc.wx %}
+              <p>天気：{{ fc.wx }}</p>
+              <p>最高 {{ fc.high }}℃ / 最低 {{ fc.low }}℃</p>
+              <p>降水確率 {% if fc['pop'] is not none %}{{ fc['pop'] }}%{% else %}—{% endif %}</p>
+            {% else %}
+              <p class="missing">データなし</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+      {% if sources.weathernews.comment %}
+      <div class="comment">
+        <strong>週間の最新見解：</strong>{{ sources.weathernews.comment }}
+      </div>
+      {% endif %}
+    </section>
+
+    <section class="site-section" id="yahoo">
+      <h3>Yahoo!天気・災害</h3>
+      <p class="sub">
+        長崎市の週間天気
+        {% if sources.yahoo.published %}　／ {{ sources.yahoo.published }}{% endif %}
+        {% if sources.yahoo.stale %}　／ 前回取得分を表示{% endif %}
+        　／
+        <a href="{{ urls.yahoo }}" target="_blank" rel="noopener">元ページを開く</a>
+      </p>
+      <div class="days-3">
+        {% for day in days %}
+          {% set fc = sources.yahoo.days.get(day.iso) %}
+          <div class="mini">
+            <h4>{{ day.short }}</h4>
+            {% if fc and fc.wx %}
+              <p>天気：{{ fc.wx }}</p>
+              <p>最高 {{ fc.high }}℃ / 最低 {{ fc.low }}℃</p>
+              <p>降水確率 {% if fc['pop'] is not none %}{{ fc['pop'] }}%{% else %}—{% endif %}</p>
+            {% else %}
+              <p class="missing">データなし</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="site-section" id="tenki">
+      <h3>tenki.jp</h3>
+      <p class="sub">
+        ハウステンボスの10日間天気（詳細）
+        {% if sources.tenki.published %}　／ {{ sources.tenki.published }}{% endif %}
+        {% if sources.tenki.stale %}　／ 前回取得分を表示{% endif %}
+        　／
+        <a href="{{ urls.tenki }}" target="_blank" rel="noopener">元ページを開く</a>
+      </p>
+      <div class="days-3 tenki-days">
+        {% for day in days %}
+          {% set fc = sources.tenki.days.get(day.iso) %}
+          <div class="mini">
+            {% if fc and fc.wx %}
+              <h4>{{ day.short }} {{ fc.wx }}</h4>
+              <p>最高 {{ fc.high }}℃ / 最低 {{ fc.low }}℃　降水 {% if fc['pop'] is not none %}{{ fc['pop'] }}%{% else %}—{% endif %}</p>
+              <p>
+                {% if fc.uv %}紫外線：{{ fc.uv }}{% endif %}
+                {% if fc.heat %}　熱中症：{{ fc.heat }}{% endif %}
+              </p>
+              {% if fc.hours %}
+              <table class="hours">
+                <thead>
+                  <tr><th>時間</th><th>天気</th><th>気温</th><th>風</th><th>湿度</th><th>降水</th></tr>
+                </thead>
+                <tbody>
+                  {% for h in fc.hours %}
+                  <tr>
+                    <td>{{ h.span }}</td>
+                    <td>{{ h.wx }}</td>
+                    <td>{% if h.temp is not none %}{{ h.temp }}℃{% endif %}</td>
+                    <td>{{ h.wind }}</td>
+                    <td>{% if h.humidity is not none %}{{ h.humidity }}%{% endif %}</td>
+                    <td>{% if h['pop'] is not none %}{{ h['pop'] }}%{% endif %}{% if h.precip %} / {{ h.precip }}{% endif %}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% endif %}
+            {% else %}
+              <h4>{{ day.short }}</h4>
+              <p class="missing">データなし</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+      <p class="sub" style="margin-top:12px;">※気温・湿度・風向風速は、各6時間区分の先頭時刻（0・6・12・18時）の予報です。</p>
+    </section>
+
+    <footer>
+      出典：
+      <a href="{{ urls.weathernews }}">ウェザーニュース</a> ／
+      <a href="{{ urls.yahoo }}">Yahoo!天気・災害</a> ／
+      <a href="{{ urls.tenki }}">tenki.jp</a><br>
+      このページは定期再取得されます。最新は各公式サイトを確認してください。
+    </footer>
+  </div>
+</body>
+</html>

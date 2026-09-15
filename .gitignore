@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+data/update.log
+data/update.lock
+_site/
+.DS_Store
