@@ -114,7 +114,7 @@
 
     .tabs a:hover { border-color: rgba(255,255,255,0.28); }
 
-    h2, h3 {
+    h2, h3, #go-score {
       scroll-margin-top: 16px;
     }
 
@@ -287,13 +287,93 @@
 
     footer a { color: #9fd8ff; }
 
+    .go-card {
+      margin: 8px 0 8px;
+      padding: 28px 28px 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 200, 87, 0.28);
+      background:
+        radial-gradient(700px 240px at 90% -20%, rgba(255, 200, 87, 0.16), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+    }
+
+    .go-card h2 {
+      margin: 0 0 6px;
+      font-size: 15px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .go-main {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 14px 20px;
+      margin: 8px 0 6px;
+    }
+
+    .go-emoji { font-size: 42px; line-height: 1; }
+    .go-pct {
+      font-family: Outfit, sans-serif;
+      font-size: clamp(56px, 9vw, 84px);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+    .go-label {
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 700;
+    }
+
+    .go-bar {
+      height: 10px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 10px 0 16px;
+      max-width: 420px;
+    }
+    .go-bar span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, #5ad0ff, #ffc857);
+    }
+
+    .go-reason {
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 46em;
+    }
+
+    .go-days {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 18px 0 12px;
+    }
+
+    .go-day {
+      background: rgba(0,0,0,0.22);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+    .go-day .name { color: var(--muted); font-size: 12px; }
+    .go-day .val { font-size: 22px; font-weight: 700; font-family: Outfit, sans-serif; }
+
+    .go-note {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
     @media (max-width: 1100px) {
       .tenki-days { grid-template-columns: 1fr; }
       .hours { font-size: 13px; }
     }
 
     @media (max-width: 900px) {
-      .compare, .days-3 { grid-template-columns: 1fr; }
+      .compare, .days-3, .go-days { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -313,11 +393,25 @@
     </header>
 
     <nav class="tabs">
+      <a href="#go-score">旅行決行度</a>
       <a href="#compare">3サイト比較</a>
       <a href="#wni">ウェザーニュース</a>
       <a href="#yahoo">Yahoo!天気</a>
       <a href="#tenki">tenki.jp</a>
     </nav>
+
+    <section class="go-card" id="go-score">
+      <h2>旅行決行度</h2>
+      <div class="go-main">
+        <span class="go-emoji" id="go-emoji">…</span>
+        <span class="go-pct" id="go-pct">--%</span>
+        <span class="go-label" id="go-label">計算中</span>
+      </div>
+      <div class="go-bar"><span id="go-bar" style="width:0%"></span></div>
+      <p class="go-reason" id="go-reason"></p>
+      <div class="go-days" id="go-days"></div>
+      <p class="go-note">※3社の天気予報をもとにした独自の旅行判断スコアです。「行ける確率」は実際の降雨確率ではありません。</p>
+    </section>
 
     <h2 id="compare">日別比較</h2>
     <section class="compare">
@@ -710,5 +804,174 @@
       このページは定期再取得されます。最新は各公式サイトを確認してください。
     </footer>
   </div>
+
+  <script type="application/json" id="forecast-data">{"days": [{"dow": "\u65e5\u66dc\u65e5", "iso": "2026-09-20", "label": "9\u670820\u65e5", "short": "20\u65e5(\u65e5)"}, {"dow": "\u6708\u66dc\u65e5", "iso": "2026-09-21", "label": "9\u670821\u65e5", "short": "21\u65e5(\u6708)"}, {"dow": "\u706b\u66dc\u65e5", "iso": "2026-09-22", "label": "9\u670822\u65e5", "short": "22\u65e5(\u706b)"}], "sources": {"tenki": {"comment": null, "days": {"2026-09-20": {"heat": "\u8b66\u6212", "high": 28, "hours": [{"humidity": 81, "pop": 10, "precip": "0\u339c", "span": "00-06", "temp": 25, "wind": "\u5317\u6771 4m/s", "wx": "\u6674"}, {"humidity": 82, "pop": 20, "precip": "0\u339c", "span": "06-12", "temp": 24, "wind": "\u5317\u5317\u6771 4m/s", "wx": "\u6674"}, {"humidity": 63, "pop": 20, "precip": "0\u339c", "span": "12-18", "temp": 28, "wind": "\u5317\u5317\u6771 6m/s", "wx": "\u6674"}, {"humidity": 72, "pop": 10, "precip": "0\u339c", "span": "18-24", "temp": 25, "wind": "\u5317\u5317\u6771 6m/s", "wx": "\u6674"}], "icon": "sunny", "low": 24, "pop": 20, "uv": "\u5f37\u3044", "wx": "\u6674"}, "2026-09-21": {"heat": "\u8b66\u6212", "high": 27, "hours": [{"humidity": 77, "pop": 10, "precip": "0\u339c", "span": "00-06", "temp": 24, "wind": "\u5317\u5317\u6771 5m/s", "wx": "\u6674"}, {"humidity": 78, "pop": 20, "precip": "0\u339c", "span": "06-12", "temp": 24, "wind": "\u5317\u5317\u6771 5m/s", "wx": "\u6674\u6642\u3005\u66c7"}, {"humidity": 67, "pop": 10, "precip": "0\u339c", "span": "12-18", "temp": 27, "wind": "\u5317\u5317\u6771 6m/s", "wx": "\u6674"}, {"humidity": 72, "pop": 10, "precip": "0\u339c", "span": "18-24", "temp": 25, "wind": "\u5317\u5317\u6771 7m/s", "wx": "\u6674"}], "icon": "sun_cloud", "low": 23, "pop": 20, "uv": "\u5f37\u3044", "wx": "\u6674\u6642\u3005\u66c7"}, "2026-09-22": {"heat": "\u8b66\u6212", "high": 28, "hours": [{"humidity": 80, "pop": 10, "precip": "0\u339c", "span": "00-06", "temp": 24, "wind": "\u5317\u5317\u6771 6m/s", "wx": "\u6674"}, {"humidity": 78, "pop": 10, "precip": "0\u339c", "span": "06-12", "temp": 24, "wind": "\u5317\u6771 6m/s", "wx": "\u6674"}, {"humidity": 67, "pop": 10, "precip": "0\u339c", "span": "12-18", "temp": 28, "wind": "\u5317\u6771 6m/s", "wx": "\u6674"}, {"humidity": 68, "pop": 10, "precip": "0\u339c", "span": "18-24", "temp": 26, "wind": "\u5317\u6771 6m/s", "wx": "\u6674"}], "icon": "sunny", "low": 24, "pop": 10, "uv": "\u5f37\u3044", "wx": "\u6674"}}, "error": null, "fetched_at": "2026-09-15T23:30:36+09:00", "key": "tenki", "name": "tenki.jp", "ok": true, "place": "\u30cf\u30a6\u30b9\u30c6\u30f3\u30dc\u30b9", "published": "2026\u5e749\u670815\u65e5 23\u664200\u5206\u767a\u8868", "stale": false, "url": "https://tenki.jp/leisure/9/45/268/2256/10days.html"}, "weathernews": {"comment": "\u30b9\u30c3\u30ad\u30ea\u3057\u306a\u3044\u7a7a\u3068\u84b8\u3057\u6691\u3055\u7d9a\u304f\u3002\u66c7\u308a\u3084\u96e8\u306e\u65e5\u304c\u591a\u304f\u306a\u308a\u307e\u3059\u3002\u964d\u308a\u65b9\u304c\u5f37\u307e\u308b\u304a\u305d\u308c\u3082\u3002\u671d\u6669\u306f\u6dbc\u3057\u304f\u611f\u3058\u3066\u3082\u3001\u663c\u9593\u306f\u30e0\u30b7\u30e0\u30b7\u3068\u4e0d\u5feb\u306a\u6691\u3055\u3068\u306a\u308b\u65e5\u304c\u591a\u3044\u305f\u3081\u3001\u4f53\u8abf\u7ba1\u7406\u3092\u4e07\u5168\u306b\u884c\u3063\u3066\u304f\u3060\u3055\u3044\u3002", "days": {"2026-09-20": {"high": 32, "icon": "cloudy", "low": 23, "pop": 40, "wx": "\u304f\u3082\u308a"}, "2026-09-21": {"high": 29, "icon": "cloudy", "low": 24, "pop": 40, "wx": "\u304f\u3082\u308a"}, "2026-09-22": {"high": 30, "icon": "cloudy", "low": 22, "pop": 40, "wx": "\u304f\u3082\u308a"}}, "error": null, "fetched_at": "2026-09-15T23:30:33+09:00", "key": "weathernews", "name": "\u30a6\u30a7\u30b6\u30fc\u30cb\u30e5\u30fc\u30b9", "ok": true, "place": "\u9577\u5d0e\u5e02", "published": null, "stale": false, "url": "https://weathernews.jp/onebox/tenki/nagasaki/42201/week.html?tab=4"}, "yahoo": {"comment": null, "days": {"2026-09-20": {"high": 31, "icon": "sunny", "low": 23, "pop": 0, "wx": "\u6674\u308c"}, "2026-09-21": {"high": 30, "icon": "sun_cloud", "low": 24, "pop": 10, "wx": "\u6674\u6642\u3005\u66c7"}, "2026-09-22": {"high": 30, "icon": "cloud_sun", "low": 24, "pop": 20, "wx": "\u66c7\u6642\u3005\u6674"}}, "error": null, "fetched_at": "2026-09-15T23:30:35+09:00", "key": "yahoo", "name": "Yahoo!\u5929\u6c17", "ok": true, "place": "\u9577\u5d0e\u5e02", "published": "2026\u5e749\u670815\u65e5 20\u664200\u5206\u767a\u8868", "stale": false, "url": "https://weather.yahoo.co.jp/weather/jp/42/8410/42201.html"}}}</script>
+  <script>
+  (function () {
+    const DAY_WEIGHT = {
+      "2026-09-20": 0.30,
+      "2026-09-21": 0.45,
+      "2026-09-22": 0.25
+    };
+    const DAY_META = {
+      "2026-09-20": { name: "9/20 長崎" },
+      "2026-09-21": { name: "9/21 HTB" },
+      "2026-09-22": { name: "9/22 九十九島" }
+    };
+    const SOURCE_WEIGHT = {
+      "2026-09-20": { weathernews: 0.38, yahoo: 0.38, tenki: 0.24 },
+      "2026-09-21": { weathernews: 0.18, yahoo: 0.18, tenki: 0.64 },
+      "2026-09-22": { weathernews: 0.28, yahoo: 0.28, tenki: 0.44 }
+    };
+
+    function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }
+    function round(n) { return Math.round(clamp(n, 0, 100)); }
+
+    function wxScore(wx) {
+      if (!wx) return 50;
+      const rain = wx.includes("雨") || wx.includes("雷");
+      const sunny = wx.includes("晴");
+      const cloudy = wx.includes("曇") || wx.includes("くもり");
+      if (rain) {
+        if (/^(雨|雷)/.test(wx) && !wx.includes("のち晴") && !wx.includes("時々晴")) return 18;
+        if (wx.includes("のち雨")) return sunny ? 42 : 34;
+        if (wx.includes("一時雨") || wx.includes("時々雨")) return sunny ? 48 : 44;
+        if (wx.includes("のち晴")) return 52;
+        return 30;
+      }
+      if (wx === "晴れ" || wx === "晴" || wx === "快晴") return 97;
+      if (wx.includes("時々曇") || wx.includes("時々くもり") || wx.includes("一時曇")) return 86;
+      if (wx.includes("時々晴") || wx.includes("一時晴")) return 80;
+      if (wx.includes("のち晴")) return 84;
+      if (wx.includes("のち曇") || wx.includes("のちくもり")) return 74;
+      if (cloudy) return 68;
+      if (sunny) return 90;
+      return 55;
+    }
+
+    function popScore(pop) {
+      if (pop == null) return 55;
+      if (pop <= 10) return 100 - pop * 0.8;
+      if (pop <= 20) return 92 - (pop - 10) * 0.8;
+      if (pop <= 40) return 84 - (pop - 20) * 1.1;
+      if (pop <= 50) return 62 - (pop - 40) * 1.4;
+      if (pop <= 70) return 48 - (pop - 50) * 1.2;
+      return Math.max(5, 24 - (pop - 70) * 0.6);
+    }
+
+    function precipMm(text) {
+      if (text == null || text === "") return null;
+      const m = String(text).replace(/㎜|mm/gi, "").match(/[\d.]+/);
+      return m ? Number(m[0]) : null;
+    }
+
+    function tenkiDaytimeBonus(fc) {
+      if (!fc || !Array.isArray(fc.hours) || !fc.hours.length) return 0;
+      const daytime = fc.hours.filter((h) => /^(06|09|12)/.test(h.span || ""));
+      if (!daytime.length) return 0;
+      const mms = daytime.map((h) => precipMm(h.precip)).filter((n) => n != null);
+      const rainyWx = daytime.some((h) => (h.wx || "").includes("雨"));
+      let bonus = 0;
+      if (mms.length && mms.every((n) => n === 0)) bonus += 8;
+      else if (mms.length) bonus -= Math.min(20, mms.reduce((a, b) => a + b, 0) * 3);
+      if (rainyWx) bonus -= 8;
+      return bonus;
+    }
+
+    function sourceScore(fc, sourceKey) {
+      if (!fc || !fc.wx) return null;
+      let score = wxScore(fc.wx) * 0.55 + popScore(fc.pop) * 0.45;
+      if (sourceKey === "tenki") score += tenkiDaytimeBonus(fc);
+      return clamp(score, 0, 100);
+    }
+
+    function blendToward50(score, others) {
+      if (others.length < 2) return score;
+      const spread = Math.max(...others) - Math.min(...others);
+      const pull = clamp((spread - 8) / 55, 0, 0.38);
+      return score * (1 - pull) + 50 * pull;
+    }
+
+    function labelFor(score) {
+      if (score >= 85) return { text: "かなり行けそう", emoji: "☀️" };
+      if (score >= 70) return { text: "行く方向でよさそう", emoji: "🌤️" };
+      if (score >= 55) return { text: "まだ様子見", emoji: "☁️" };
+      if (score >= 40) return { text: "五分五分", emoji: "🌦️" };
+      if (score >= 20) return { text: "中止寄り", emoji: "🌧️" };
+      return { text: "今回は厳しそう", emoji: "⛈️" };
+    }
+
+    function reasonText(dayScores, sources) {
+      const bits = [];
+      const rainDays = [];
+      for (const row of dayScores) {
+        for (const src of ["weathernews", "yahoo", "tenki"]) {
+          const fc = (((sources[src] || {}).days) || {})[row.iso];
+          if (!fc) continue;
+          const rainy = (fc.wx || "").includes("雨") || (fc.pop != null && fc.pop >= 60);
+          if (rainy) rainDays.push(String(Number(row.iso.slice(8))));
+        }
+      }
+      const uniqueRain = [...new Set(rainDays)];
+      if (!uniqueRain.length) bits.push("3社とも大きな雨予報なし");
+      else bits.push(uniqueRain.join("・") + "日に雨寄りの予報あり");
+
+      const tenki21 = (((sources.tenki || {}).days) || {})["2026-09-21"];
+      if (tenki21 && tenki21.wx) {
+        bits.push("特に21日のハウステンボスは「" + tenki21.wx + "」");
+      }
+
+      const maxSpread = Math.max(...dayScores.map((d) => d.spread), 0);
+      if (maxSpread >= 25) bits.push("社によって予報が割れているため確信度は控えめです");
+      else bits.push("現時点では旅行決行寄りです");
+      return bits.join("。") + "。";
+    }
+
+    const el = document.getElementById("forecast-data");
+    if (!el) return;
+    const data = JSON.parse(el.textContent);
+    const sources = data.sources || {};
+    const days = (data.days || []).map((d) => d.iso);
+
+    const dayScores = days.map((iso) => {
+      const weights = SOURCE_WEIGHT[iso] || { weathernews: 1 / 3, yahoo: 1 / 3, tenki: 1 / 3 };
+      const parts = [];
+      let wsum = 0;
+      let acc = 0;
+      for (const key of ["weathernews", "yahoo", "tenki"]) {
+        const fc = (((sources[key] || {}).days) || {})[iso];
+        const s = sourceScore(fc, key);
+        if (s == null) continue;
+        parts.push(s);
+        acc += s * (weights[key] || 0);
+        wsum += weights[key] || 0;
+      }
+      let score = wsum ? acc / wsum : 50;
+      score = blendToward50(score, parts);
+      const spread = parts.length ? Math.max(...parts) - Math.min(...parts) : 0;
+      return { iso, score: round(score), spread };
+    });
+
+    let trip = 0;
+    let tw = 0;
+    for (const row of dayScores) {
+      const w = DAY_WEIGHT[row.iso] || (1 / Math.max(dayScores.length, 1));
+      trip += row.score * w;
+      tw += w;
+    }
+    const overall = round(tw ? trip / tw : 50);
+    const lab = labelFor(overall);
+
+    document.getElementById("go-emoji").textContent = lab.emoji;
+    document.getElementById("go-pct").textContent = overall + "%";
+    document.getElementById("go-label").textContent = lab.text;
+    document.getElementById("go-bar").style.width = overall + "%";
+    document.getElementById("go-reason").textContent = reasonText(dayScores, sources);
+    document.getElementById("go-days").innerHTML = dayScores.map((row) => {
+      const meta = DAY_META[row.iso] || { name: row.iso };
+      return '<div class="go-day"><div class="name">' + meta.name + '</div><div class="val">' + row.score + '%</div></div>';
+    }).join("");
+  })();
+  </script>
 </body>
 </html>
