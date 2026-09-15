@@ -1,6 +1,6 @@
 {
-  "fetched_at": "2026-09-15T23:55:53+09:00",
-  "fetched_at_label": "2026年9月15日 23:55",
+  "fetched_at": "2026-09-16T00:11:02+09:00",
+  "fetched_at_label": "2026年9月16日 00:11",
   "title_range": "9月20日〜22日",
   "days": [
     {
@@ -31,7 +31,7 @@
       "ok": true,
       "stale": false,
       "error": null,
-      "fetched_at": "2026-09-15T23:55:47+09:00",
+      "fetched_at": "2026-09-16T00:10:56+09:00",
       "published": null,
       "comment": "スッキリしない空と蒸し暑さ続く。曇りや雨の日が多くなります。降り方が強まるおそれも。朝晩は涼しく感じても、昼間はムシムシと不快な暑さとなる日が多いため、体調管理を万全に行ってください。",
       "days": {
@@ -66,7 +66,7 @@
       "ok": true,
       "stale": false,
       "error": null,
-      "fetched_at": "2026-09-15T23:55:51+09:00",
+      "fetched_at": "2026-09-16T00:11:00+09:00",
       "published": "2026年9月15日 20時00分発表",
       "comment": null,
       "days": {
@@ -101,8 +101,8 @@
       "ok": true,
       "stale": false,
       "error": null,
-      "fetched_at": "2026-09-15T23:55:53+09:00",
-      "published": "2026年9月15日 23時00分発表",
+      "fetched_at": "2026-09-16T00:11:02+09:00",
+      "published": "2026年9月16日 00時00分発表",
       "comment": null,
       "days": {
         "2026-09-20": {
