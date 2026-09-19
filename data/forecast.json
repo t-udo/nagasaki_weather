@@ -1,6 +1,6 @@
 {
-  "fetched_at": "2026-09-19T08:15:48+09:00",
-  "fetched_at_label": "2026年9月19日 08:15",
+  "fetched_at": "2026-09-19T16:59:07+09:00",
+  "fetched_at_label": "2026年9月19日 16:59",
   "title_range": "9月20日〜22日",
   "days": [
     {
@@ -31,14 +31,14 @@
       "ok": true,
       "stale": false,
       "error": null,
-      "fetched_at": "2026-09-19T08:15:44+09:00",
+      "fetched_at": "2026-09-19T16:59:02+09:00",
       "published": null,
-      "comment": "晴れて蒸し暑い 体調管理を。晴れて日差しの届く日が多くなります。昼間はムシムシと不快な暑さとなりますが、朝晩の涼しさや虫の声に秋を感じられそうです。体調管理にお気をつけください。",
+      "comment": "日差し届く 蒸し暑い。晴れて日差しの届く日が多くなります。朝晩は涼しい日も増えますが、昼間のムシムシとした暑さはもうしばらく続きそうです。",
       "days": {
         "2026-09-20": {
-          "wx": "晴れ",
-          "icon": "sunny",
-          "high": 29,
+          "wx": "晴れ時々くもり",
+          "icon": "sun_cloud",
+          "high": 30,
           "low": 23,
           "pop": 20
         },
@@ -52,8 +52,8 @@
         "2026-09-22": {
           "wx": "晴れ時々くもり",
           "icon": "sun_cloud",
-          "high": 31,
-          "low": 21,
+          "high": 30,
+          "low": 22,
           "pop": 20
         }
       }
@@ -66,13 +66,13 @@
       "ok": true,
       "stale": false,
       "error": null,
-      "fetched_at": "2026-09-19T08:15:47+09:00",
-      "published": "2026年9月19日 7時00分発表",
+      "fetched_at": "2026-09-19T16:59:05+09:00",
+      "published": "2026年9月19日 15時00分発表",
       "comment": null,
       "days": {
         "2026-09-21": {
-          "wx": "晴時々曇",
-          "icon": "sun_cloud",
+          "wx": "晴れ",
+          "icon": "sunny",
           "high": 29,
           "low": 22,
           "pop": 0
@@ -80,7 +80,7 @@
         "2026-09-22": {
           "wx": "晴れ",
           "icon": "sunny",
-          "high": 29,
+          "high": 28,
           "low": 21,
           "pop": 0
         },
@@ -101,64 +101,64 @@
       "ok": true,
       "stale": false,
       "error": null,
-      "fetched_at": "2026-09-19T08:15:48+09:00",
-      "published": "2026年9月19日 08時00分発表",
+      "fetched_at": "2026-09-19T16:59:07+09:00",
+      "published": "2026年9月19日 16時00分発表",
       "comment": null,
       "days": {
         "2026-09-20": {
-          "wx": "曇のち晴",
+          "wx": "曇時々晴",
           "icon": "cloud_sun",
           "high": 28,
           "low": 24,
-          "pop": 20,
+          "pop": 40,
           "uv": "強い",
           "heat": "警戒",
           "hours": [
             {
               "span": "00-06",
               "wx": "曇",
-              "temp": 25,
+              "temp": 24,
               "pop": 20,
               "precip": "0㎜",
-              "humidity": 88,
-              "wind": "北北東 4m/s"
+              "humidity": 89,
+              "wind": "北北東 5m/s"
             },
             {
               "span": "06-12",
               "wx": "曇",
               "temp": 24,
-              "pop": 20,
+              "pop": 30,
               "precip": "0㎜",
-              "humidity": 87,
-              "wind": "北北東 4m/s"
+              "humidity": 86,
+              "wind": "北北東 5m/s"
             },
             {
               "span": "12-18",
-              "wx": "曇時々晴",
+              "wx": "曇",
               "temp": 27,
               "pop": 20,
               "precip": "0㎜",
-              "humidity": 69,
+              "humidity": 71,
               "wind": "北北東 6m/s"
             },
             {
               "span": "18-24",
-              "wx": "晴時々曇",
+              "wx": "曇のち晴",
               "temp": 24,
-              "pop": 20,
+              "pop": 40,
               "precip": "0㎜",
-              "humidity": 75,
-              "wind": "北北東 6m/s"
+              "humidity": 78,
+              "wind": "北北東 5m/s"
             }
           ]
         },
         "2026-09-21": {
           "wx": "晴",
           "icon": "sunny",
-          "high": 28,
+          "high": 27,
           "low": 23,
           "pop": 20,
-          "uv": "強い",
+          "uv": "非常に強い",
           "heat": "警戒",
           "hours": [
             {
@@ -185,7 +185,7 @@
               "temp": 27,
               "pop": 10,
               "precip": "0㎜",
-              "humidity": 60,
+              "humidity": 64,
               "wind": "北北東 6m/s"
             },
             {
@@ -194,7 +194,7 @@
               "temp": 24,
               "pop": 0,
               "precip": "0㎜",
-              "humidity": 67,
+              "humidity": 68,
               "wind": "北北東 6m/s"
             }
           ]
@@ -202,7 +202,7 @@
         "2026-09-22": {
           "wx": "晴",
           "icon": "sunny",
-          "high": 29,
+          "high": 28,
           "low": 23,
           "pop": 10,
           "uv": "非常に強い",
@@ -229,10 +229,10 @@
             {
               "span": "12-18",
               "wx": "晴",
-              "temp": 27,
-              "pop": 10,
+              "temp": 28,
+              "pop": 0,
               "precip": "0㎜",
-              "humidity": 55,
+              "humidity": 57,
               "wind": "北北東 5m/s"
             },
             {
@@ -241,8 +241,8 @@
               "temp": 24,
               "pop": 10,
               "precip": "0㎜",
-              "humidity": 65,
-              "wind": "北北東 5m/s"
+              "humidity": 66,
+              "wind": "北北東 6m/s"
             }
           ]
         }
