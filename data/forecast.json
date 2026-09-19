@@ -1,6 +1,6 @@
 {
-  "fetched_at": "2026-09-19T16:59:07+09:00",
-  "fetched_at_label": "2026年9月19日 16:59",
+  "fetched_at": "2026-09-19T22:05:49+09:00",
+  "fetched_at_label": "2026年9月19日 22:05",
   "title_range": "9月20日〜22日",
   "days": [
     {
@@ -31,7 +31,7 @@
       "ok": true,
       "stale": false,
       "error": null,
-      "fetched_at": "2026-09-19T16:59:02+09:00",
+      "fetched_at": "2026-09-19T22:05:43+09:00",
       "published": null,
       "comment": "日差し届く 蒸し暑い。晴れて日差しの届く日が多くなります。朝晩は涼しい日も増えますが、昼間のムシムシとした暑さはもうしばらく続きそうです。",
       "days": {
@@ -66,8 +66,8 @@
       "ok": true,
       "stale": false,
       "error": null,
-      "fetched_at": "2026-09-19T16:59:05+09:00",
-      "published": "2026年9月19日 15時00分発表",
+      "fetched_at": "2026-09-19T22:05:47+09:00",
+      "published": "2026年9月19日 20時00分発表",
       "comment": null,
       "days": {
         "2026-09-21": {
@@ -101,8 +101,8 @@
       "ok": true,
       "stale": false,
       "error": null,
-      "fetched_at": "2026-09-19T16:59:07+09:00",
-      "published": "2026年9月19日 16時00分発表",
+      "fetched_at": "2026-09-19T22:05:49+09:00",
+      "published": "2026年9月19日 21時00分発表",
       "comment": null,
       "days": {
         "2026-09-20": {
@@ -120,32 +120,32 @@
               "temp": 24,
               "pop": 20,
               "precip": "0㎜",
-              "humidity": 89,
+              "humidity": 88,
               "wind": "北北東 5m/s"
             },
             {
               "span": "06-12",
               "wx": "曇",
               "temp": 24,
-              "pop": 30,
+              "pop": 40,
               "precip": "0㎜",
-              "humidity": 86,
-              "wind": "北北東 5m/s"
+              "humidity": 87,
+              "wind": "北北東 4m/s"
             },
             {
               "span": "12-18",
-              "wx": "曇",
+              "wx": "曇時々晴",
               "temp": 27,
               "pop": 20,
               "precip": "0㎜",
-              "humidity": 71,
+              "humidity": 73,
               "wind": "北北東 6m/s"
             },
             {
               "span": "18-24",
               "wx": "曇のち晴",
               "temp": 24,
-              "pop": 40,
+              "pop": 20,
               "precip": "0㎜",
               "humidity": 78,
               "wind": "北北東 5m/s"
@@ -158,7 +158,7 @@
           "high": 27,
           "low": 23,
           "pop": 20,
-          "uv": "非常に強い",
+          "uv": "強い",
           "heat": "警戒",
           "hours": [
             {
@@ -176,7 +176,7 @@
               "temp": 23,
               "pop": 20,
               "precip": "0㎜",
-              "humidity": 75,
+              "humidity": 73,
               "wind": "北北東 4m/s"
             },
             {
@@ -185,16 +185,16 @@
               "temp": 27,
               "pop": 10,
               "precip": "0㎜",
-              "humidity": 64,
-              "wind": "北北東 6m/s"
+              "humidity": 65,
+              "wind": "北北東 5m/s"
             },
             {
               "span": "18-24",
               "wx": "晴",
               "temp": 24,
-              "pop": 0,
+              "pop": 10,
               "precip": "0㎜",
-              "humidity": 68,
+              "humidity": 67,
               "wind": "北北東 6m/s"
             }
           ]
@@ -204,7 +204,7 @@
           "icon": "sunny",
           "high": 28,
           "low": 23,
-          "pop": 10,
+          "pop": 0,
           "uv": "非常に強い",
           "heat": "警戒",
           "hours": [
@@ -223,7 +223,7 @@
               "temp": 23,
               "pop": 0,
               "precip": "0㎜",
-              "humidity": 74,
+              "humidity": 73,
               "wind": "北東 4m/s"
             },
             {
@@ -239,9 +239,9 @@
               "span": "18-24",
               "wx": "晴",
               "temp": 24,
-              "pop": 10,
+              "pop": 0,
               "precip": "0㎜",
-              "humidity": 66,
+              "humidity": 67,
               "wind": "北北東 6m/s"
             }
           ]
